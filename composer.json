@@ -1,0 +1,27 @@
+{
+	"name": "axllent/silverstripe-weblog",
+	"description": "A blog module for SilverStripe",
+	"type": "silverstripe-module",
+	"homepage": "https://github.com/axllent/silverstripe-weblog",
+	"keywords": ["silverstripe", "blog", "news"],
+	"license": "The MIT License (MIT)",
+	"authors": [
+		{
+			"name": "Ralph Slooten",
+			"homepage": "http://www.axllent.org/"
+		}
+	],
+	"support": {
+		"issues": "https://github.com/axllent/silverstripe-weblog/issues"
+	},
+    "require": {
+        "silverstripe/cms": "^4.0",
+        "silverstripe/lumberjack": "dev-master@dev",
+        "silverstripe/tagfield": "dev-master@dev"
+	},
+    "autoload": {
+        "psr-4": {
+            "Axllent\\Weblog\\": "src/"
+        }
+    }
+}
