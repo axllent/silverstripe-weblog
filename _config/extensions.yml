@@ -1,0 +1,3 @@
+Axllent\Weblog\Model\Blog:
+  extensions:
+    - SilverStripe\Lumberjack\Model\Lumberjack
