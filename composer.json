@@ -16,12 +16,16 @@
 	},
     "require": {
         "silverstripe/cms": "^4.0",
-        "silverstripe/lumberjack": "dev-master@dev",
-        "silverstripe/tagfield": "dev-master@dev"
+        "silverstripe/assets": "^1.0@dev",
+        "silverstripe/asset-admin": "^1.0@dev",
+        "silverstripe/lumberjack": "dev-master@dev"
 	},
     "autoload": {
         "psr-4": {
             "Axllent\\Weblog\\": "src/"
         }
+    },
+    "conflict": {
+        "silverstripe/blog": "*"
     }
 }
