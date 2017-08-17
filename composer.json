@@ -14,6 +14,12 @@
 	"support": {
 		"issues": "https://github.com/axllent/silverstripe-weblog/issues"
 	},
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/silverstripe/silverstripe-lumberjack"
+        }
+    ],
     "require": {
         "silverstripe/cms": "^4.0",
         "silverstripe/assets": "^1.0@dev",
