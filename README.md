@@ -6,11 +6,10 @@ The SilverStripe weblog module is a simplified adaption of the SilverStripe Blog
 The idea is to start with a basic framework for your blog, and add only the necessary
 features when needed.
 
-**This module is still in beta and relies on development versions of SilverStripe,
-lumberjack & tagfield.**
+**This module is still in beta and relies on development versions of SilverStripe & lumberjack.**
 
 
-# Features
+## Features
 
 - Basic foundation for Blog and BlogPosts
 - A single custom permissions group `CMS_ACCESS_Weblog`
@@ -18,7 +17,7 @@ lumberjack & tagfield.**
 - Featured image
 
 
-# Documentation
+## Documentation
 
 - [Installation](docs/en/Installation.md)
 - [Configuration](docs/en/Configuration.md)
