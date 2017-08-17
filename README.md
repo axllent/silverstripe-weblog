@@ -6,7 +6,7 @@ The SilverStripe weblog module is a simplified adaption of the SilverStripe Blog
 The idea is to start with a basic framework for your blog, and add only the necessary
 features when needed.
 
-**This module is still in beta and relies on development versions of SilverStripe & lumberjack.**
+**This module is still in beta and relies on development versions of SilverStripe 4 & lumberjack.**
 
 
 ## Features
