@@ -28,7 +28,6 @@ features when needed.
 ```
 silverstripe/cms: ^4.0
 silverstripe/lumberjack: dev-master@dev
-silverstripe/tagfield: dev-master@dev
 ```
 
 ## Suggested Modules
