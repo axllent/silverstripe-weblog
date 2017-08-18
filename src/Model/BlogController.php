@@ -22,6 +22,7 @@ class BlogController extends PageController
     public function index()
     {
         $this->blogPosts = $this->getBlogPosts();
+        RSSFeed::linkToFeed($this->Link() . 'rss', $this->Title);
         return $this->render();
     }
 

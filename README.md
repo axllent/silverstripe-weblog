@@ -18,7 +18,8 @@ from the project.
 - A single custom "Weblog" permissions group `CMS_ACCESS_Weblog`
 - Scheduled blog posts
 - Featured image
-- Integrated with `lumberjack` for easy post management.
+- Integrated with `lumberjack` for easy post management
+- RSS
 
 
 ## Documentation
