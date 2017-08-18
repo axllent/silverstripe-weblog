@@ -20,6 +20,7 @@ from the project.
 - Featured image
 - Integrated with `lumberjack` for easy post management
 - RSS
+- Open Graph meta tags
 
 
 ## Documentation
