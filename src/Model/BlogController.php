@@ -11,12 +11,12 @@ use SilverStripe\ORM\PaginatedList;
 class BlogController extends PageController
 {
     private static $allowed_actions = array(
-        'Archive',
+        'viewArchive',
         'rss'
     );
 
     private static $url_handlers = array(
-        'archive//$Year!/$Month' => 'Archive'
+        'archive//$Year!/$Month' => 'viewArchive'
     );
 
     public function index()
@@ -27,15 +27,46 @@ class BlogController extends PageController
     }
 
     /**
-     * Archived posts either by year or year-month
+     * Display archived posts either by year or year-month
      */
-    public function Archive($request)
+    public function viewArchive($request)
     {
         $year = $request->param('Year');
         $month = $request->param('Month');
 
-        if (!$year || !is_numeric($year)) {
+
+        $this->blogPosts = $this->getArchives();
+
+        if (!$this->blogPosts->count()) {
             return $this->httpError(404);
+        }
+
+        $title = $year;
+        if ($month) {
+            $title = $month . '/' . $year;
+        }
+
+        $orig_title = $this->dataRecord->Title;
+
+        $this->Title = 'Archived posts for "' . $title . '" | ' . $orig_title;
+
+        $this->ArchivePeriod = $title;
+
+        return $this->render();
+    }
+
+    /**
+     * Return archived posts for year-[month-]
+     * @param null
+     * @return ArrayList
+     */
+    public function getArchives()
+    {
+        $year = $this->request->param('Year');
+        $month = $this->request->param('Month');
+
+        if (!$year || !is_numeric($year)) {
+            return new ArrayList();
         }
 
         $publish_filter = $year . '-';
@@ -44,15 +75,9 @@ class BlogController extends PageController
             $publish_filter .= $month . '-';
         }
 
-        $this->blogPosts = $this->getBlogPosts()->filter(
+        return $this->getBlogPosts()->filter(
             'PublishDate:StartsWith', $publish_filter
         );
-
-        if (!$this->blogPosts->count()) {
-            return $this->httpError(404);
-        }
-
-        return $this->render();
     }
 
     /**
