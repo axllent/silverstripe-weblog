@@ -7,7 +7,9 @@ use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\Image;
 use SilverStripe\Forms\DatetimeField;
 use SilverStripe\ORM\FieldType\DBDatetime;
+use SilverStripe\ORM\FieldType\DBText;
 use SilverStripe\Security\Permission;
+use SilverStripe\Forms\TextAreaField;
 
 class BlogPost extends Page
 {
@@ -25,14 +27,15 @@ class BlogPost extends Page
 
     private static $db = [
         'PublishDate' => 'Datetime',
-        'Summary'     => 'HTMLText'
+        'Summary'     => 'Text'
     ];
 
     /**
      * @var array
      */
     private static $casting = [
-        'Date' => 'DBDatetime'
+        'Date' => 'DBDatetime',
+        'PostSummary' => 'HTMLFragment'
     ];
 
     private static $summary_fields = array(
@@ -74,8 +77,6 @@ class BlogPost extends Page
         $featured_image->setFolderName($this->config()->get('featured_image_folder'));
         $featured_image->getValidator()->setAllowedExtensions(array('jpg', 'jpeg', 'png', 'gif'));
 
-        /* @TODO: Summary */
-
         $fields->addFieldToTab(
             'Root.Main',
             $featured_image,
@@ -93,7 +94,33 @@ class BlogPost extends Page
             'Will be set to "now" if published without a value.'
         );
 
+        $fields->addFieldToTab('Root.PostOptions',
+            TextAreaField::create('Summary', 'Post Summary')
+                ->setRightTitle('If used, this will be shown in the blog post overview instead of an excerpt')
+        );
+
         return $fields;
+    }
+
+
+    /**
+     * An extendible post summary for use in overview and Open Data
+     * @return html
+     */
+    public function PostSummary()
+    {
+        $extended = $this->extend('updatePostSummary');
+        if ($extended) {
+            return $extended;
+        }
+
+        if ($this->Summary) {
+            $summary = $this->Summary;
+        } else {
+            $summary = $this->Content;
+        }
+        return $summary;
+        // return $this-
     }
 
 
@@ -140,6 +167,9 @@ class BlogPost extends Page
             $this->PublishDate = DBDatetime::now()->getValue();
             $this->write();
         }
+
+        $this->Summary = trim($this->Summary);
+
         $this->extend('onBeforePublish');
     }
 
