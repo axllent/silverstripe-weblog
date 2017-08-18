@@ -46,11 +46,10 @@ class BlogPostController extends PageController
             }
 
             $content = DBText::create()->setValue($this->PostSummary());
-
             $og .= HTML::createTag('meta', [
                 'property' => 'og:description',
                 'content' => strip_tags($content->Summary())
-            ]) . "\n";
+            ]);
 
             Requirements::insertHeadTags(trim($og));
         }
