@@ -31,6 +31,9 @@
             "Axllent\\Weblog\\": "src/"
         }
     },
+    "suggest": {
+        "axllent/silverstripe-weblog-categories": "optional: add categories to your blog posts"
+    },
     "conflict": {
         "silverstripe/blog": "*"
     }

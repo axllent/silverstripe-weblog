@@ -9,7 +9,7 @@ The SilverStripe Weblog module was built from the ground up, however is based on
 [module](https://github.com/silverstripe/silverstripe-blog), and borrows some ideas and methods
 from the project.
 
-**This module is still in beta and relies on development versions of SilverStripe 4 & lumberjack.**
+**This module currently relies on development versions of SilverStripe 4 & lumberjack.**
 
 
 ## Features
