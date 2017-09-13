@@ -28,24 +28,28 @@ class BlogPostController extends PageController
         if ($this->config()->get('open_graph')) {
             $og = HTML::createTag('meta', [
                 'property' => 'og:title',
-                'content' => $this->Title
+                'content' => $this->dataRecord->Title
             ]) . "\n";
             $og .= HTML::createTag('meta', [
                 'property' => 'og:url',
-                'content' => $this->AbsoluteLink()
+                'content' => $this->dataRecord->AbsoluteLink()
             ]) . "\n";
             $og .= HTML::createTag('meta', [
                 'property' => 'og:site_name',
                 'content' => SiteConfig::current_site_config()->Title
             ]) . "\n";
-            if ($this->FeaturedImage()->exists()) {
+            if ($this->dataRecord->FeaturedImage()->exists()) {
                 $og .= HTML::createTag('meta', [
                     'property' => 'og:image',
-                    'content' => $this->FeaturedImage()->AbsoluteURL
+                    'content' => $this->dataRecord->FeaturedImage()->AbsoluteURL
                 ]) . "\n";
             }
 
-            $content = DBText::create()->setValue($this->PostSummary());
+            if ($this->dataRecord->Summary) {
+                $content = DBText::create()->setValue($this->dataRecord->Summary);
+            } else {
+                $content = DBText::create()->setValue($this->dataRecord->Content);
+            }
             $og .= HTML::createTag('meta', [
                 'property' => 'og:description',
                 'content' => strip_tags($content->Summary())
@@ -53,15 +57,6 @@ class BlogPostController extends PageController
 
             Requirements::insertHeadTags(trim($og));
         }
-
-        //         <meta property="og:title" content="Store your gear in one place with the Carry Wash &amp; Store Bag"/>
-        // 		<meta property="og:type" content="article"/>
-        // 		<meta property="og:url" content="https://www.railblaza.com/store-your-gear-in-one-place-with-the-carry-wash-store-bag/"/>
-        //
-        // 		<meta property="og:description" content="C.W.S Bag (Carry Wash Store)
-        // Keeping gear together and losing small parts on a boat, kayak or even in the shed has its challenges. Washing it down one piece at a time takes ages. RAILBLAZA have the answer with the new CWS Bag. This mesh bag is designed to not only keep your"/>
-        //
-        // 									<meta property="og:image" content="https://www.railblaza.com/wp-content/uploads/2015/10/Carry-Wash-Stow-bag-121.jpg"/>
 
         RSSFeed::linkToFeed($this->Link() . 'rss', $this->Title);
         return $this->render();
