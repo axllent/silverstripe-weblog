@@ -34,8 +34,7 @@ class BlogPost extends Page
      * @var array
      */
     private static $casting = [
-        'Date' => 'DBDatetime',
-        'PostSummary' => 'HTMLFragment'
+        'Date' => 'DBDatetime'
     ];
 
     private static $summary_fields = array(
@@ -101,28 +100,6 @@ class BlogPost extends Page
 
         return $fields;
     }
-
-
-    /**
-     * An extendible post summary for use in overview and Open Data
-     * @return html
-     */
-    public function PostSummary()
-    {
-        $extended = $this->extend('updatePostSummary');
-        if ($extended) {
-            return $extended;
-        }
-
-        if ($this->Summary) {
-            $summary = $this->Summary;
-        } else {
-            $summary = $this->Content;
-        }
-        return $summary;
-        // return $this-
-    }
-
 
     /**
      * Display the publish date in rss feeds.
