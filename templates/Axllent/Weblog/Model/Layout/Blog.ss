@@ -9,7 +9,7 @@
                 <p>
                     Published $PublishDate.Month $PublishDate.DayOfMonth(true), $PublishDate.Year
                 </p>
-                <p>$$PostSummary.Summary</p>
+                <p>$PostSummary.Summary</p>
                 <p><a href="$Link">Read more...</a></p>
             </div>
         <% end_loop %>
