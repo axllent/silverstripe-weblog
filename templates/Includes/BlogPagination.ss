@@ -15,7 +15,7 @@
 
             <% loop $PaginationSummary(4) %>
                 <% if $CurrentBool %>
-                    <li class="active"><span>$PageNum</span></a></li>
+                    <li class="active"><span>$PageNum</span></li>
                 <% else %>
                     <% if $Link %>
                         <li><a href="$Link">$PageNum</a></li>
