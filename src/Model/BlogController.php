@@ -107,7 +107,7 @@ class BlogController extends PageController
      */
     public function rss()
     {
-        $this->blogPosts = $this->getBlogPosts();
+        $this->blogPosts = $this->getBlogPosts()->limit($this->PostsPerPage);
 
         $rss = new RSSFeed($this->blogPosts, $this->Link(), $this->Title, $this->MetaDescription);
 
