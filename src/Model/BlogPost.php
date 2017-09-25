@@ -2,14 +2,15 @@
 
 namespace Axllent\Weblog\Model;
 
+use Axllent\Weblog\Model\Blog;
 use Page;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\Image;
 use SilverStripe\Forms\DatetimeField;
+use SilverStripe\Forms\TextAreaField;
 use SilverStripe\ORM\FieldType\DBDatetime;
 use SilverStripe\ORM\FieldType\DBText;
 use SilverStripe\Security\Permission;
-use SilverStripe\Forms\TextAreaField;
 
 class BlogPost extends Page
 {
@@ -30,9 +31,6 @@ class BlogPost extends Page
         'Summary'     => 'Text'
     ];
 
-    /**
-     * @var array
-     */
     private static $casting = [
         'Date' => 'DBDatetime'
     ];
@@ -129,6 +127,22 @@ class BlogPost extends Page
             ->sort(array('PublishDate' => 'ASC', 'ID' => 'ASC'))
             ->limit(1)
             ->first();
+    }
+
+    /**
+     * Ensure the Parent is a Blog, if not move it to the first blog
+     */
+    public function onBeforeWrite()
+    {
+        parent::onBeforeWrite();
+        $parent = $this->Parent();
+        if ($parent->exists() && !$parent instanceof Blog) {
+            $first_blog = Blog::get()->first();
+            if ($first_blog) {
+                $this->ParentID = $first_blog->ID;
+            }
+        }
+        $this->extend('onBeforeWrite');
     }
 
     /**
