@@ -67,6 +67,9 @@ class BlogPost extends Page
 
         $fields->removeByName('MenuTitle');
 
+        // Set the Title to "Post Title"
+        $fields->dataFieldByName('Title')->setTitle('Post Title');
+
         $featured_image = UploadField::create(
             'FeaturedImage',
             'Featured Image'
