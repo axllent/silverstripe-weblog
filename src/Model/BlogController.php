@@ -10,19 +10,19 @@ use SilverStripe\ORM\PaginatedList;
 
 class BlogController extends PageController
 {
-    private static $allowed_actions = array(
+    private static $allowed_actions = [
         'viewArchive',
         'rss'
-    );
+    ];
 
-    private static $url_handlers = array(
+    private static $url_handlers = [
         'archive//$Year!/$Month' => 'viewArchive'
-    );
+    ];
 
     public function index()
     {
         $this->blogPosts = $this->getBlogPosts();
-        RSSFeed::linkToFeed($this->Link() . 'rss', $this->Title);
+        RSSFeed::linkToFeed($this->Link() . 'rss/', $this->Title);
         return $this->render();
     }
 
