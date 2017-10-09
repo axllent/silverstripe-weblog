@@ -2,6 +2,12 @@
 
 Notable changes to this project will be documented in this file.
 
+## [1.0.0-beta5]
+
+- Trailing slash for RSS feed on BlogController
+- RSS redirection for BlogPostController
+
+
 ## [1.0.0-beta4]
 
 - Set the "Title" to "Post Title"
