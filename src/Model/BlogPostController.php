@@ -9,11 +9,6 @@ use SilverStripe\View\HTML;
 use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\ORM\FieldType\DBText;
 
-// use SilverStripe\Core\Config\Config;
-// use SilverStripe\ORM\ArrayList;
-// use SilverStripe\ORM\FieldType\DBDatetime;
-// use SilverStripe\ORM\PaginatedList;
-
 class BlogPostController extends PageController
 {
 
@@ -22,6 +17,10 @@ class BlogPostController extends PageController
      * Add Open Graph headers to posts
      */
     private static $open_graph = true;
+
+    private static $allowed_actions = [
+        'rss'
+    ];
 
     public function index()
     {
@@ -60,5 +59,15 @@ class BlogPostController extends PageController
 
         RSSFeed::linkToFeed($this->Link() . 'rss', $this->Title);
         return $this->render();
+    }
+
+    /**
+     * Redirect any rss requests to the parent Blog RSS
+     * @param HTTPRequest $request
+     * @return HTTPResponse
+     */
+    public function rss($request)
+    {
+        return $this->redirect($this->dataRecord->Parent()->Link() . 'rss/');
     }
 }
