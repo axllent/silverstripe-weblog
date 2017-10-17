@@ -2,6 +2,11 @@
 
 Notable changes to this project will be documented in this file.
 
+## [1.0.0-beta6]
+
+- Switch to silverstripe-vendormodule
+
+
 ## [1.0.0-beta5]
 
 - Trailing slash for RSS feed on BlogController
