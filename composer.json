@@ -1,7 +1,7 @@
 {
 	"name": "axllent/silverstripe-weblog",
 	"description": "A blog module for SilverStripe",
-	"type": "silverstripe-module",
+	"type": "silverstripe-vendormodule",
 	"homepage": "https://github.com/axllent/silverstripe-weblog",
 	"keywords": ["silverstripe", "blog", "news"],
 	"license": "The MIT License (MIT)",
@@ -21,11 +21,18 @@
         }
     ],
     "require": {
+        "silverstripe/vendor-plugin": "^1.0",
         "silverstripe/cms": "^4.0",
         "silverstripe/assets": "^1.0@dev",
         "silverstripe/asset-admin": "^1.0@dev",
         "silverstripe/lumberjack": "dev-master@dev"
 	},
+    "extra": {
+        "expose": [
+            "css",
+            "icons"
+        ]
+    },
     "autoload": {
         "psr-4": {
             "Axllent\\Weblog\\": "src/"

@@ -18,7 +18,7 @@ class GridFieldBlogPostState extends GridFieldSiteTreeState
     public function getColumnContent($gridField, $record, $columnName)
     {
         if ($columnName == 'State') {
-            Requirements::css(WEBLOG_DIR . '/css/gridfield.css');
+            Requirements::css('axllent/silverstripe-weblog: css/gridfield.css');
             if ($record instanceof BlogPost) {
                 $modifiedLabel = '';
 
