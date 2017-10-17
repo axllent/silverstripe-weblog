@@ -26,7 +26,7 @@ class Blog extends Page implements PermissionProvider
 {
     private static $description = 'Adds a blog to your website.';
 
-    private static $icon = 'axllent/silverstripe-weblog: icons/Blog.png';
+    private static $icon = 'resources/axllent/silverstripe-weblog/icons/Blog.png';
 
     private static $table_name = 'Blog';
 

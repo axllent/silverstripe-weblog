@@ -20,7 +20,7 @@ class BlogPost extends Page
 
     private static $default_parent = 'Blog';
 
-    private static $icon = 'silverstripe-weblog/icons/BlogPost.png';
+    private static $icon = 'resources/axllent/silverstripe-weblog/icons/BlogPost.png';
 
     private static $featured_image_folder = 'Blog';
 
