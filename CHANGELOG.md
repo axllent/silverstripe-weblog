@@ -4,7 +4,7 @@ Notable changes to this project will be documented in this file.
 
 ## [1.0.0]
 
-- Page icons for [vendor modules](silverstripe/silverstripe-cms#1996)
+- Page icons for vendor modules [see pull request](https://github.com/silverstripe/silverstripe-cms/pull/1996)
 - Update requirements
 
 
