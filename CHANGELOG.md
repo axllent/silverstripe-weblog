@@ -2,9 +2,9 @@
 
 Notable changes to this project will be documented in this file.
 
-## []
+## [1.0.0]
 
-- Page icons in vendor modules
+- Page icons for vendor modules (silverstripe/silverstripe-cms#1996)
 - Update requirements
 
 
