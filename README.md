@@ -9,17 +9,15 @@ The SilverStripe Weblog module was built from the ground up, however is based on
 [module](https://github.com/silverstripe/silverstripe-blog), and borrows some ideas and methods
 from the project.
 
-**This module currently relies on development versions of SilverStripe 4 & lumberjack.**
-
 
 ## Features
 
 - Basic foundation for Blog and BlogPosts
 - A single custom "Weblog" permissions group `CMS_ACCESS_Weblog`
 - Scheduled blog posts
-- Featured image
-- Integrated with `lumberjack` for easy post management
-- RSS
+- Featured image for blog posts
+- Integrated with `silverstripe/lumberjack` for easy post management
+- Blog RSS
 - Open Graph meta tags
 
 
@@ -33,9 +31,11 @@ from the project.
 
 ```
 silverstripe/cms: ^4.0
-silverstripe/lumberjack: dev-master@dev
+silverstripe/lumberjack
 ```
+
 
 ## Suggested Modules
 
 - [axllent/silverstripe-weblog-categories](https://github.com/axllent/silverstripe-weblog-categories) - Blog categories module
+- [axllent/silverstripe-weblog-wp-import](https://github.com/axllent/silverstripe-weblog-wp-import) - A tool to import WordPress blog posts
