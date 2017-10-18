@@ -33,7 +33,8 @@
         }
     },
     "suggest": {
-        "axllent/silverstripe-weblog-categories": "optional: add categories to your blog posts"
+        "axllent/silverstripe-weblog-categories": "optional: add categories to your blog posts",
+        "axllent/silverstripe-weblog-wp-import": "optional: import WordPress blog posts"
     },
     "conflict": {
         "silverstripe/blog": "*"
