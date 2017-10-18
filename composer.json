@@ -14,18 +14,12 @@
 	"support": {
 		"issues": "https://github.com/axllent/silverstripe-weblog/issues"
 	},
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/silverstripe/silverstripe-lumberjack"
-        }
-    ],
     "require": {
         "silverstripe/vendor-plugin": "^1.0",
         "silverstripe/cms": "^4.0",
-        "silverstripe/assets": "^1.0@dev",
-        "silverstripe/asset-admin": "^1.0@dev",
-        "silverstripe/lumberjack": "dev-master@dev"
+        "silverstripe/assets": "^1.0",
+        "silverstripe/asset-admin": "^1.0",
+        "silverstripe/lumberjack": "^2.0"
 	},
     "extra": {
         "expose": [
