@@ -2,6 +2,11 @@
 
 Notable changes to this project will be documented in this file.
 
+## []
+
+- Page icons in vendor modules
+
+
 ## [1.0.0-beta6]
 
 - Switch to silverstripe-vendormodule
