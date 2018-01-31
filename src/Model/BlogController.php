@@ -35,7 +35,7 @@ class BlogController extends PageController
         $month = $request->param('Month');
 
 
-        $this->blogPosts = $this->getArchives();
+        $this->blogPosts = $this->getArchivesByDate();
 
         if (!$this->blogPosts->count()) {
             return $this->httpError(404);
@@ -60,7 +60,7 @@ class BlogController extends PageController
      * @param null
      * @return ArrayList
      */
-    public function getArchives()
+    public function getArchivesByDate()
     {
         $year = $this->request->param('Year');
         $month = $this->request->param('Month');
