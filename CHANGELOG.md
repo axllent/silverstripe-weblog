@@ -4,7 +4,7 @@ Notable changes to this project will be documented in this file.
 
 ## [1.0.1]
 
-- Allow extending with updateCMSFields
+- Allow extending classnames (updateBlogCMSFields|updateBlogPostCMSFields)
 
 
 ## [1.0.0]
