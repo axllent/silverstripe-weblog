@@ -62,6 +62,8 @@ class Blog extends Page implements PermissionProvider
             $fields->addFieldsToTab('Root.Main', $content_fields);
         }
 
+        $this->extend('updateCMSFields', $fields);
+
         return $fields;
     }
 

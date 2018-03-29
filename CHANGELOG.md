@@ -2,6 +2,11 @@
 
 Notable changes to this project will be documented in this file.
 
+## [1.0.1]
+
+- Allow extending with updateCMSFields
+
+
 ## [1.0.0]
 
 - Page icons for vendor modules [see pull request](https://github.com/silverstripe/silverstripe-cms/pull/1996)

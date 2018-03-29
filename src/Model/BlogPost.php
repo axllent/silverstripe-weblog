@@ -99,6 +99,8 @@ class BlogPost extends Page
                 ->setRightTitle('If used, this will be shown in the blog post overview instead of an excerpt')
         );
 
+        $this->extend('updateCMSFields', $fields);
+
         return $fields;
     }
 
