@@ -223,16 +223,4 @@ class Blog extends Page implements PermissionProvider
         };
         return parent::canEdit($member, $context);
     }
-
-    public function canView($member = null, $context = [])
-    {
-        $extended = $this->extendedCan('canView', $member);
-        if ($extended !== null) {
-            return $extended;
-        }
-        if (Permission::check('CMS_ACCESS_Weblog', 'any', $member)) {
-            return true;
-        };
-        return parent::canView($member, $context);
-    }
 }
