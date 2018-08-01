@@ -2,7 +2,7 @@
 
 Notable changes to this project will be documented in this file.
 
-## [1.1.1]
+## [1.2.0]
 
 - Modify permissions calculation
 - Add published state column
