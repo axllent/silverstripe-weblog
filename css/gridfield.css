@@ -1,3 +1,16 @@
 .gridfield-icon.blog-icon-timer {
 	background: url("../icons/Scheduled.png") center no-repeat;
 }
+
+.gridfield-status.status-published {
+	color: #28a745;
+}
+
+.gridfield-status.status-modified {
+	color: #ffc107;
+}
+
+.gridfield-status.status-draft {
+	color: #868c91;
+	font-style: italic;
+}

@@ -1,3 +1,7 @@
 Axllent\Weblog\Model\Blog:
   extensions:
     - SilverStripe\Lumberjack\Model\Lumberjack
+
+Axllent\Weblog\Model\BlogPost:
+  extensions:
+    - Axllent\Weblog\Extensions\PublishedStatusExtension
