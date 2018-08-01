@@ -2,7 +2,12 @@
 
 Notable changes to this project will be documented in this file.
 
-## [1.0.1]
+## [1.1.1]
+
+- Modify permissions calculation
+- Add published state column
+
+## [1.1.0]
 
 - Allow extending CMSFields (updateBlogCMSFields|updateBlogPostCMSFields)
 
