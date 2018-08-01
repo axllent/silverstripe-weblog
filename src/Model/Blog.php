@@ -71,7 +71,8 @@ class Blog extends Page implements PermissionProvider
     {
         $fields = parent::getSettingsFields();
 
-        $fields->addFieldToTab('Root.Settings',
+        $fields->addFieldToTab(
+            'Root.Settings',
             NumericField::create('PostsPerPage', 'Blog posts per page'),
             'Visibility'
         );
@@ -106,8 +107,6 @@ class Blog extends Page implements PermissionProvider
     public function getLumberjackGridFieldConfig()
     {
         return GridFieldConfig_BlogPost::create();
-        $config->addComponent(new GridFieldSortableRows('Title'));
-        return $config;
     }
 
     /**
@@ -212,15 +211,15 @@ class Blog extends Page implements PermissionProvider
         );
     }
 
-    public function canEdit($member = null, $context = [])
+    public function canAddChildren($member = null)
     {
-        $extended = $this->extendedCan('canEdit', $member);
+        $extended = $this->extendedCan('canAddChildren', $member);
         if ($extended !== null) {
             return $extended;
         }
         if (Permission::check('CMS_ACCESS_Weblog', 'any', $member)) {
             return true;
         };
-        return parent::canEdit($member, $context);
+        return parent::canAddChildren($member);
     }
 }

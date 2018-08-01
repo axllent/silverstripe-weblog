@@ -36,7 +36,8 @@ class BlogPost extends Page
     ];
 
     private static $summary_fields = array(
-        'Title'
+        'Title' => 'Title',
+        'getGridfieldPublishedStatus' => 'Status'
     );
 
     private static $has_one = array(
@@ -68,7 +69,9 @@ class BlogPost extends Page
         $fields->removeByName('MenuTitle');
 
         // Set the Title to "Post Title"
-        $fields->dataFieldByName('Title')->setTitle('Post Title');
+        if ($title = $fields->dataFieldByName('Title')) {
+            $title->setTitle('Post Title');
+        }
 
         $featured_image = UploadField::create(
             'FeaturedImage',
@@ -85,16 +88,21 @@ class BlogPost extends Page
 
         $url_segment = $fields->dataFieldByName('URLSegment');
 
-        $fields->addFieldsToTab('Root.PostOptions', [
-            $url_segment,
+        if ($url_segment) {
+            $fields->addFieldToTab('Root.PostOptions', $url_segment);
+        }
+
+        $fields->addFieldToTab(
+            'Root.PostOptions',
             $publish_date = DatetimeField::create('PublishDate')
-        ]);
+        );
 
         $publish_date->setDescription(
             'Will be set to "now" if published without a value.'
         );
 
-        $fields->addFieldToTab('Root.PostOptions',
+        $fields->addFieldToTab(
+            'Root.PostOptions',
             TextAreaField::create('Summary', 'Post Summary')
                 ->setRightTitle('If used, this will be shown in the blog post overview instead of an excerpt')
         );
@@ -114,7 +122,7 @@ class BlogPost extends Page
         return !empty($this->PublishDate) ? $this->PublishDate : null;
     }
 
-    public function PreviousBlogPost()
+    public function previousBlogPost()
     {
         $all_posts = $this->Parent()->getBlogPosts();
         return $all_posts->filter('PublishDate:LessThan', $this->PublishDate)
@@ -124,7 +132,7 @@ class BlogPost extends Page
             ->first();
     }
 
-    public function NextBlogPost()
+    public function nextBlogPost()
     {
         $all_posts = $this->Parent()->getBlogPosts();
         return $all_posts->filter('PublishDate:GreaterThan', $this->PublishDate)
@@ -199,9 +207,13 @@ class BlogPost extends Page
         if ($extended !== null) {
             return $extended;
         }
-        if (Permission::check('CMS_ACCESS_Weblog', 'any', $member)) {
-            return true;
-        };
+        $parent = isset($context['Parent']) ? $context['Parent'] : null;
+        $strictParentInstance = ($parent && $parent instanceof Blog);
+        if ($strictParentInstance) {
+            return Permission::check('CMS_ACCESS_Weblog', 'any', $member);
+        } else {
+            return false;
+        }
         return parent::canCreate($member, $context);
     }
 
