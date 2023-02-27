@@ -1,11 +1,11 @@
-# SilverStripe Weblog Module
+# Silverstripe Weblog Module
 
-SilverStripe Weblog is a basic blogging framework. The core package doesn't contain complicated
+Silverstripe Weblog is a basic blogging framework. The core package doesn't contain complicated
 permissions, authors, comments, tags or categories. These features can be added separately
 if necessary & when needed through extensions such as
 [weblog-categories](https://github.com/axllent/silverstripe-weblog-categories).
 
-The SilverStripe Weblog module was built from the ground up, however is based on the SilverStripe Blog
+The Silverstripe Weblog module was built from the ground up, however is based on the Silverstripe Blog
 [module](https://github.com/silverstripe/silverstripe-blog), and borrows some ideas and methods
 from the project.
 
