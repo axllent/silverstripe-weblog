@@ -172,7 +172,7 @@ class BlogPost extends Page
             $this->write();
         }
 
-        $this->Summary = trim($this->Summary);
+        $this->Summary = trim($this->dbObject('Summary'));
 
         $this->extend('onBeforePublish');
     }
@@ -194,7 +194,7 @@ class BlogPost extends Page
         $extended = $this->extendedCan('canView', $member);
         if ($extended !== null) {
             return $extended;
-        } elseif (strtotime($this->PublishDate) < time()) {
+        } elseif (strtotime((int)$this->PublishDate) < time()) {
             return true;
         } else {
             return Permission::check('CMS_ACCESS_Weblog', 'any', $member);
