@@ -93,10 +93,18 @@ class Blog extends Page implements PermissionProvider
     /* Fix gridfield sorting by publish date */
     public function getLumberjackPagesForGridfield($included = array())
     {
-        return BlogPost::get()->filter([
+        $filtered = BlogPost::get()->filter([
             'ParentID' => $this->owner->ID,
             'ClassName' => $included,
-        ])->sort('"PublishDate" IS NULL DESC, "PublishDate" DESC');
+        ]);
+
+        $sort = '"PublishDate" IS NULL DESC, "PublishDate" DESC';
+
+        // Silverstripe 5 performs more strict validation of columns
+        // A new API method is provided when using raw SQL (i.e. IS NULL)
+        return method_exists($filtered, 'orderBy') ?
+            $filtered->orderBy($sort) :
+            $filtered->sort($sort);
     }
 
     /**
