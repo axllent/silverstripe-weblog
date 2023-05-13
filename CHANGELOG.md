@@ -2,6 +2,13 @@
 
 Notable changes to this project will be documented in this file.
 
+## [1.4.0]
+
+- Silverstripe 5 compatibility
+- PHP 8.2 support
+- Code cleanup
+
+
 ## [1.3.0]
 
 - Rename Controller method with name collision
