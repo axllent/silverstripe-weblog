@@ -2,6 +2,11 @@
 
 Notable changes to this project will be documented in this file.
 
+## [1.4.1]
+
+- Minor bug fixes
+
+
 ## [1.4.0]
 
 - Silverstripe 5 compatibility
