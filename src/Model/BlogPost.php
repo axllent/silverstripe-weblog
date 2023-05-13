@@ -246,6 +246,7 @@ class BlogPost extends \Page
     public function onBeforeWrite()
     {
         parent::onBeforeWrite();
+
         $parent = $this->Parent();
         if ($parent->exists() && !$parent instanceof Blog) {
             $first_blog = Blog::get()->first();
@@ -253,13 +254,18 @@ class BlogPost extends \Page
                 $this->ParentID = $first_blog->ID;
             }
         }
+
         $this->extend('onBeforeWrite');
     }
 
     /**
      * Update the PublishDate to now if the BlogPost would otherwise be published without a date.
+     *
+     * @param DataObject $original Original record
+     *
+     * @return void
      */
-    public function onBeforePublish()
+    public function onBeforePublish(&$original)
     {
         /**
          * @var DBDatetime $publishDate
@@ -267,12 +273,11 @@ class BlogPost extends \Page
         $publishDate = $this->dbObject('PublishDate');
         if (!$publishDate->getValue()) {
             $this->PublishDate = DBDatetime::now()->getValue();
-            $this->write();
         }
 
-        $this->Summary = trim($this->dbObject('Summary'));
+        $this->Summary = trim(strval($this->Summary));
 
-        $this->extend('onBeforePublish');
+        $this->extend('onBeforePublish', $original);
     }
 
     public function canEdit($member = null, $context = [])
