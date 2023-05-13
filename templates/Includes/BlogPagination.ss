@@ -4,8 +4,8 @@
 			<% if $NotFirstPage %>
 				<li>
 					<a href="{$PrevLink}" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
+						<span aria-hidden="true">&laquo;</span>
+					</a>
 				</li>
 			<% else %>
 				<li class="disabled">
@@ -26,8 +26,8 @@
 			<% if $NotLastPage %>
 				<li>
 					<a href="{$NextLink}" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
+						<span aria-hidden="true">&raquo;</span>
+					</a>
 				</li>
 			<% else %>
 				<li class="disabled">
@@ -36,4 +36,4 @@
 			<% end_if %>
 		</ul>
 	</nav>
-	<% end_if %>
+<% end_if %>

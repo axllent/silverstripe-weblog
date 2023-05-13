@@ -1,4 +1,4 @@
-# Installing SilverStripe Weblog
+# Installing Silverstripe Weblog
 
 The weblog module can be installed via composer:
 

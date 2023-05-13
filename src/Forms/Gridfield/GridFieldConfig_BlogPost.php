@@ -7,12 +7,15 @@ use SilverStripe\Lumberjack\Forms\GridFieldSiteTreeState;
 
 /**
  * GridField config necessary for managing a SiteTree object.
- *
  */
 class GridFieldConfig_BlogPost extends GridFieldConfig_Lumberjack
 {
     /**
-     * @param null|int $itemsPerPage
+     * Lumberjack items per page
+     *
+     * @param int $itemsPerPage Items per page
+     *
+     * @return void
      */
     public function __construct($itemsPerPage = null)
     {

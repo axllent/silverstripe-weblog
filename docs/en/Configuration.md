@@ -1,15 +1,15 @@
-# Configuring SilverStripe Weblog
+# Configuring Silverstripe Weblog
 
 In your CMS you need to add a `Blog` page, in which you will be able to add Blog Posts.
 
-To adjust the number of blog enties listed per page, edit the page's settings
+To adjust the number of blog entries listed per page, edit the page's settings
 (Blog posts per page, default 10).
 
 Make sure your user is either `ADMIN`, or is part of the `CMS_ACCESS_Weblog` group.
 
 ## Templating
 
-SilverStripe Weblog comes with a very simplistic template and you are going to need
+Silverstripe Weblog comes with a very simplistic template and you are going to need
 to customise this for your own website.
 
 ### Main templates

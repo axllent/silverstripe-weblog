@@ -2,38 +2,57 @@
 
 namespace Axllent\Weblog\Model;
 
-use PageController;
 use SilverStripe\Control\RSS\RSSFeed;
 use SilverStripe\ORM\ArrayList;
-use SilverStripe\ORM\FieldType\DBDatetime;
 use SilverStripe\ORM\PaginatedList;
 
-class BlogController extends PageController
+class BlogController extends \PageController
 {
+    /**
+     * Allowed actions
+     *
+     * @var array
+     *
+     * @config
+     */
     private static $allowed_actions = [
         'viewArchive',
-        'rss'
+        'rss',
     ];
 
+    /**
+     * URL handlers for controller
+     *
+     * @var array
+     */
     private static $url_handlers = [
-        'archive//$Year!/$Month' => 'viewArchive'
+        'archive//$Year!/$Month' => 'viewArchive',
     ];
 
-    public function index()
+    /**
+     * Index
+     *
+     * @param HTTPRequest $request HTTP request
+     *
+     * @return HTTPResponse
+     */
+    public function index($request)
     {
         $this->blogPosts = $this->getBlogPosts();
-        RSSFeed::linkToFeed($this->Link() . 'rss/', $this->Title);
+        RSSFeed::linkToFeed($this->Link('rss'), $this->Title);
+
         return $this->render();
     }
 
     /**
      * Display archived posts either by year or year-month
+     *
+     * @param mixed $request
      */
     public function viewArchive($request)
     {
-        $year = $request->param('Year');
+        $year  = $request->param('Year');
         $month = $request->param('Month');
-
 
         $this->blogPosts = $this->getArchivesByDate();
 
@@ -42,6 +61,7 @@ class BlogController extends PageController
         }
 
         $title = $year;
+
         if ($month) {
             $title = $month . '/' . $year;
         }
@@ -57,12 +77,14 @@ class BlogController extends PageController
 
     /**
      * Return archived posts for year-[month-]
+     *
      * @param null
+     *
      * @return ArrayList
      */
     public function getArchivesByDate()
     {
-        $year = $this->request->param('Year');
+        $year  = $this->request->param('Year');
         $month = $this->request->param('Month');
 
         if (!$year || !is_numeric($year)) {
@@ -76,7 +98,8 @@ class BlogController extends PageController
         }
 
         return $this->getBlogPosts()->filter(
-            'PublishDate:StartsWith', $publish_filter
+            'PublishDate:StartsWith',
+            $publish_filter
         );
     }
 
@@ -85,7 +108,7 @@ class BlogController extends PageController
      *
      * @return PaginatedList
      */
-    public function PaginatedList()
+    public function paginatedList()
     {
         $all_posts = $this->blogPosts ?: ArrayList::create();
 

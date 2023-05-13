@@ -21,5 +21,4 @@
 	<% end_if %>
 
 	$Content
-	$Form
 </div>

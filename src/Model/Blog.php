@@ -3,16 +3,10 @@
 namespace Axllent\Weblog\Model;
 
 use Axllent\Weblog\Forms\GridField\GridFieldConfig_BlogPost;
-use Axllent\Weblog\Model\BlogPost;
-use Page;
-use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Core\Convert;
 use SilverStripe\Forms\GridField\GridField;
-use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
-use SilverStripe\Forms\HeaderField;
 use SilverStripe\Forms\NumericField;
 use SilverStripe\Forms\Tab;
-use SilverStripe\Lumberjack\Model\Lumberjack;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\FieldType\DBDate;
 use SilverStripe\ORM\FieldType\DBDatetime;
@@ -22,35 +16,76 @@ use SilverStripe\Security\Permission;
 use SilverStripe\Security\PermissionProvider;
 use SilverStripe\View\ArrayData;
 
-class Blog extends Page implements PermissionProvider
+class Blog extends \Page implements PermissionProvider
 {
+    /**
+     * Page description
+     *
+     * @var string
+     *
+     * @config
+     */
     private static $description = 'Adds a blog to your website.';
 
+    /**
+     * Page icon class
+     *
+     * @var string
+     *
+     * @config
+     */
     private static $icon = 'axllent/silverstripe-weblog: icons/Blog.png';
 
+    /**
+     * Table name
+     *
+     * @var string
+     */
     private static $table_name = 'Blog';
 
     /**
-     * Database fields
+     * Database field definitions
+     *
      * @var array
+     *
+     * @config
      */
     private static $db = [
         'PostsPerPage' => 'Int',
     ];
 
+    /**
+     * Allowed children
+     *
+     * @var array
+     *
+     * @config
+     */
     private static $allowed_children = [
         BlogPost::class,
     ];
 
+    /**
+     * DataObject defaults
+     *
+     * @var array
+     *
+     * @config
+     */
     private static $defaults = [
-        'PostsPerPage'    => 10
+        'PostsPerPage' => 10,
     ];
 
+    /**
+     * Data administration interface in Silverstripe
+     *
+     * @return FieldList Returns a TabSet for usage within the CMS
+     */
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
 
-        /* Move the main tab to the end */
+        // Move the main tab to the end
         $content_tab = $fields->findOrMakeTab('Root.Main');
         if ($content_tab && $content_fields = $content_tab->FieldList()) {
             $title = $content_tab->Title;
@@ -67,6 +102,11 @@ class Blog extends Page implements PermissionProvider
         return $fields;
     }
 
+    /**
+     * Get settings fields
+     *
+     * @return FieldList
+     */
     public function getSettingsFields()
     {
         $fields = parent::getSettingsFields();
@@ -81,22 +121,24 @@ class Blog extends Page implements PermissionProvider
     }
 
     /**
-     * This sets the title for our gridfield.
+     * This sets the title for our GridField.
      *
      * @return string
      */
     public function getLumberjackTitle()
     {
-        return 'Blog Posts';
+        return 'Blog posts';
     }
 
-    /* Fix gridfield sorting by publish date */
-    public function getLumberjackPagesForGridfield($included = array())
+    // Fix GridField sorting by publish date
+    public function getLumberjackPagesForGridField($included = [])
     {
-        $filtered = BlogPost::get()->filter([
-            'ParentID' => $this->owner->ID,
-            'ClassName' => $included,
-        ]);
+        $filtered = BlogPost::get()->filter(
+            [
+                'ParentID'  => $this->owner->ID,
+                'ClassName' => $included,
+            ]
+        );
 
         $sort = '"PublishDate" IS NULL DESC, "PublishDate" DESC';
 
@@ -108,10 +150,10 @@ class Blog extends Page implements PermissionProvider
     }
 
     /**
-      * This overwrites lumberjacks default gridfield config.
-      *
-      * @return GridFieldConfig
-      */
+     * This overwrites lumberjacks default GridField config.
+     *
+     * @return GridFieldConfig
+     */
     public function getLumberjackGridFieldConfig()
     {
         return GridFieldConfig_BlogPost::create();
@@ -129,50 +171,58 @@ class Blog extends Page implements PermissionProvider
             ->where(sprintf('"PublishDate" < \'%s\'', Convert::raw2sql(DBDatetime::now())));
 
         $this->extend('updateGetBlogPosts', $blog_posts);
+
         return $blog_posts;
     }
 
     /**
      * Return all years & months containing visible blog posts
+     *
      * @param null
+     *
      * @return ArrayData of Years and Months
      */
     public function getArchives()
     {
         $all_posts = $this->getBlogPosts();
-        $years = [];
-        $months = [];
+        $years     = [];
+        $months    = [];
 
         foreach ($all_posts as $post) {
             if (preg_match('/^(\d\d\d\d)-(\d\d)-/', $post->PublishDate, $match)) {
                 if (empty($years[$match[1]])) {
                     $years[$match[1]] = 1;
                 } else {
-                    $years[$match[1]]++;
+                    ++$years[$match[1]];
                 }
                 if (empty($months[$match[1] . '-' . $match[2]])) {
                     $months[$match[1] . '-' . $match[2]] = 1;
                 } else {
-                    $months[$match[1] . '-' . $match[2]]++;
+                    ++$months[$match[1] . '-' . $match[2]];
                 }
             }
         }
-        $output = ArrayData::create([
-            'Years' => ArrayList::create(),
-            'Months' => ArrayList::create(),
-        ]);
-        $link_base = $this->Link() . 'archive/';
+        $output = ArrayData::create(
+            [
+                'Years'  => ArrayList::create(),
+                'Months' => ArrayList::create(),
+            ]
+        );
+
+        $link_base = $this->Link('archive');
 
         foreach ($years as $year => $count) {
             $yr = DBYear::create();
             $yr->setValue($year);
             $cnt = DBInt::create();
             $cnt->setValue($count);
-            $result = ArrayData::create([
-                'Year' => $yr,
-                'Count' => $cnt,
-                'Link' => $link_base . $year . '/'
-            ]);
+            $result = ArrayData::create(
+                [
+                    'Year'  => $yr,
+                    'Count' => $cnt,
+                    'Link'  => rtrim($link_base, '/') . '/' . $year . '/',
+                ]
+            );
             $output->Years->push($result);
         }
 
@@ -181,11 +231,13 @@ class Blog extends Page implements PermissionProvider
             $mth->setValue($month . '-01');
             $cnt = DBInt::create();
             $cnt->setValue($count);
-            $result = ArrayData::create([
-                'Month' => $mth,
-                'Count' => $cnt,
-                'Link' => $link_base . str_replace('-', '/', $month) . '/'
-            ]);
+            $result = ArrayData::create(
+                [
+                    'Month' => $mth,
+                    'Count' => $cnt,
+                    'Link'  => rtrim($link_base, '/') . '/' . str_replace('-', '/', $month) . '/',
+                ]
+            );
             $output->Months->push($result);
         }
 
@@ -193,11 +245,14 @@ class Blog extends Page implements PermissionProvider
     }
 
     /**
-     * Update the PublishDate to now if the BlogPost would otherwise be published without a date.
+     * Event handler called before writing to the database
+     *
+     * @return void
      */
     public function onBeforeWrite()
     {
         parent::onBeforeWrite();
+
         if (!$this->PostsPerPage) {
             $this->PostsPerPage = 10;
         }
@@ -205,29 +260,39 @@ class Blog extends Page implements PermissionProvider
     }
 
     /**
-     * Custom group for blog editing
+     * Provide permissions
+     *
+     * @return void
      */
     public function providePermissions()
     {
-        return array(
-            'CMS_ACCESS_Weblog' => array(
-                'name' => 'Weblog editor (create / edit posts)',
+        return [
+            'CMS_ACCESS_Weblog' => [
+                'name'     => 'Weblog editor (create / edit posts)',
                 'category' => _t('SilverStripe\\Security\\Permission.CONTENT_CATEGORY', 'CMS Access'),
-                'help' => 'Overrules more specific access settings.',
-                'sort' => 100
-            )
-        );
+                'help'     => 'Overrules more specific access settings.',
+                'sort'     => 100,
+            ],
+        ];
     }
 
+    /**
+     * Can add children
+     *
+     * @param Member $member Member
+     *
+     * @return bool
+     */
     public function canAddChildren($member = null)
     {
         $extended = $this->extendedCan('canAddChildren', $member);
-        if ($extended !== null) {
+        if (null !== $extended) {
             return $extended;
         }
         if (Permission::check('CMS_ACCESS_Weblog', 'any', $member)) {
             return true;
-        };
+        }
+
         return parent::canAddChildren($member);
     }
 }

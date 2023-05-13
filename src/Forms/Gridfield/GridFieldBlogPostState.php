@@ -13,11 +13,17 @@ use SilverStripe\View\Requirements;
 class GridFieldBlogPostState extends GridFieldSiteTreeState
 {
     /**
-     * {@inheritdoc}
+     * Get GridField column content
+     *
+     * @param GridField  $gridField  GridField
+     * @param DataObject $record     DataObject
+     * @param string     $columnName Column name
+     *
+     * @return void
      */
     public function getColumnContent($gridField, $record, $columnName)
     {
-        if ($columnName == 'State') {
+        if ('State' == $columnName) {
             Requirements::css('axllent/silverstripe-weblog: css/gridfield.css');
             if ($record instanceof BlogPost) {
                 $modifiedLabel = '';
@@ -36,9 +42,9 @@ class GridFieldBlogPostState extends GridFieldSiteTreeState
                         'GridFieldBlogPostState.Draft',
                         '<i class="btn-icon gridfield-icon btn-icon-pencil"></i> Saved as Draft on {date}',
                         'State for when a post is saved.',
-                        array(
+                        [
                             'date' => $lastEdited->FormatFromSettings(),
-                        )
+                        ]
                     );
                 }
 
@@ -52,9 +58,9 @@ class GridFieldBlogPostState extends GridFieldSiteTreeState
                         'GridFieldBlogPostState.Timer',
                         '<i class="gridfield-icon blog-icon-timer"></i> Publish at {date}',
                         'State for when a post is published.',
-                        array(
+                        [
                             'date' => $publishDate->FormatFromSettings(),
-                        )
+                        ]
                     ) . $modifiedLabel;
                 }
 
@@ -62,9 +68,9 @@ class GridFieldBlogPostState extends GridFieldSiteTreeState
                     'GridFieldBlogPostState.Published',
                     '<i class="btn-icon gridfield-icon btn-icon-accept"></i> Published on {date}',
                     'State for when a post is published.',
-                    array(
+                    [
                         'date' => $publishDate->FormatFromSettings(),
-                    )
+                    ]
                 ) . $modifiedLabel;
             }
         }
@@ -73,11 +79,17 @@ class GridFieldBlogPostState extends GridFieldSiteTreeState
     }
 
     /**
-     * {@inheritdoc}
+     * Get column attributes
+     *
+     * @param GridField  $gridField  GridField
+     * @param DataObject $record     DataObject
+     * @param string     $columnName Column name
+     *
+     * @return void
      */
     public function getColumnAttributes($gridField, $record, $columnName)
     {
-        if ($columnName == 'State') {
+        if ('State' == $columnName) {
             if ($record instanceof BlogPost) {
                 $published = $record->isPublished();
 
@@ -89,12 +101,12 @@ class GridFieldBlogPostState extends GridFieldSiteTreeState
                     $class = 'gridfield-icon published';
                 }
 
-                return array(
+                return [
                     'class' => $class,
-                );
+                ];
             }
         }
 
-        return array();
+        return [];
     }
 }

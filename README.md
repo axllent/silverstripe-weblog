@@ -12,7 +12,7 @@ from the project.
 
 ## Features
 
-- Basic foundation for Blog and BlogPosts
+- Basic foundation for blog and blog posts
 - A single custom "Weblog" permissions group `CMS_ACCESS_Weblog`
 - Scheduled blog posts
 - Featured image for blog posts
@@ -30,7 +30,7 @@ from the project.
 ## Requirements
 
 ```
-silverstripe/cms: ^4.0
+silverstripe/cms: ^4.0 || ^5.0
 silverstripe/lumberjack
 ```
 
