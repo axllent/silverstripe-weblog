@@ -2,6 +2,11 @@
 
 Notable changes to this project will be documented in this file.
 
+## [1.4.2]
+
+- Fix: canView() logic
+
+
 ## [1.4.1]
 
 - Minor bug fixes
