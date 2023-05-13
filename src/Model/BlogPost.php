@@ -275,7 +275,7 @@ class BlogPost extends \Page
             $this->PublishDate = DBDatetime::now()->getValue();
         }
 
-        $this->Summary = trim(strval($this->Summary));
+        $this->Summary = trim((string) $this->Summary);
 
         $this->extend('onBeforePublish', $original);
     }
@@ -299,7 +299,7 @@ class BlogPost extends \Page
         if (null !== $extended) {
             return $extended;
         }
-        if (strtotime((int) $this->PublishDate) < time()) {
+        if (strtotime((string) $this->PublishDate) < time()) {
             return true;
         }
 
@@ -319,8 +319,6 @@ class BlogPost extends \Page
         }
 
         return false;
-
-        return parent::canCreate($member, $context);
     }
 
     public function canDelete($member = null, $context = [])
