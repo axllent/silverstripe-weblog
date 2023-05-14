@@ -1,4 +1,4 @@
-<div class="typography blog-post">
+<div class="blog-post">
 	<header>
 		<h1>$Title</h1>
 	</header>
@@ -8,10 +8,7 @@
 		<% if $Categories %>
 			&nbsp; | &nbsp;
 			<% loop $Categories %>
-				<a href="$Link">$Title</a>
-				<% if $Last %>
-				<% else %>,
-				<% end_if %>
+				<a href="$Link">$Title</a><% if not $IsLast %>,<% end_if %>
 			<% end_loop %>
 		<% end_if %>
 	</p>

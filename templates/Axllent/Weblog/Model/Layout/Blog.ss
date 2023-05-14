@@ -1,4 +1,4 @@
-<div class="typography">
+<div class="blog-posts">
 	<% if $PaginatedList.Exists %>
 		<% loop $PaginatedList %>
 			<div class="blogentry">
