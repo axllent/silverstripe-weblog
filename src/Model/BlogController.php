@@ -4,10 +4,18 @@ namespace Axllent\Weblog\Model;
 
 use SilverStripe\Control\RSS\RSSFeed;
 use SilverStripe\ORM\ArrayList;
+use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\PaginatedList;
 
 class BlogController extends \PageController
 {
+    /**
+     * Set Blog Posts
+     *
+     * @var DataList
+     */
+    public $blogPosts = DataList::class;
+
     /**
      * Allowed actions
      *
@@ -88,7 +96,7 @@ class BlogController extends \PageController
         $month = $this->request->param('Month');
 
         if (!$year || !is_numeric($year)) {
-            return new ArrayList();
+            return ArrayList::create();
         }
 
         $publish_filter = $year . '-';
