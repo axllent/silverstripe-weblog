@@ -2,6 +2,11 @@
 
 Notable changes to this project will be documented in this file.
 
+## [1.4.3]
+
+- Bugfix: Declare $blogPosts in BlogController
+
+
 ## [1.4.2]
 
 - Replace deprecated $Last with $IsLast (template example)
