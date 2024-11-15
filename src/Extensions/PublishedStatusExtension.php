@@ -4,7 +4,7 @@ namespace Axllent\Weblog\Extensions;
 
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Convert;
-use SilverStripe\ORM\DataExtension;
+use SilverStripe\Core\Extension;
 use SilverStripe\ORM\FieldType\DBHTMLText;
 use SilverStripe\Versioned\Versioned;
 
@@ -12,7 +12,7 @@ use SilverStripe\Versioned\Versioned;
  * Extension to show the published status of a DataObject that has
  * the Versioned extension on it
  */
-class PublishedStatusExtension extends DataExtension
+class PublishedStatusExtension extends Extension
 {
     public const STATUS_NOT_VERSIONED = 'Not versioned';
     public const STATUS_NOT_SAVED     = 'Not saved';
