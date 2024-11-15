@@ -2,6 +2,11 @@
 
 Notable changes to this project will be documented in this file.
 
+## [1.4.4]
+
+- Replace deprecated DataExtension with Extension
+
+
 ## [1.4.3]
 
 - Bugfix: Declare $blogPosts in BlogController
