@@ -3,9 +3,9 @@
 namespace Axllent\Weblog\Model;
 
 use SilverStripe\Control\RSS\RSSFeed;
-use SilverStripe\ORM\ArrayList;
+use SilverStripe\Model\List\ArrayList;
+use SilverStripe\Model\List\PaginatedList;
 use SilverStripe\ORM\DataList;
-use SilverStripe\ORM\PaginatedList;
 
 class BlogController extends \PageController
 {

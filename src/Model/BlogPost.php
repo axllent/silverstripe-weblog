@@ -43,7 +43,7 @@ class BlogPost extends \Page
      *
      * @config
      */
-    private static $icon = 'axllent/silverstripe-weblog: icons/BlogPost.png';
+    private static $cms_icon = 'axllent/silverstripe-weblog: icons/BlogPost.png';
 
     /**
      * Default featured image folder
