@@ -85,6 +85,8 @@ class Blog extends \Page implements PermissionProvider
     {
         $fields = parent::getCMSFields();
 
+        $fields->removeByName('PostsPerPage');
+
         // Move the main tab to the end
         $content_tab = $fields->findOrMakeTab('Root.Main');
         if ($content_tab && $content_fields = $content_tab->FieldList()) {
