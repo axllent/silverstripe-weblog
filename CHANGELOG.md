@@ -2,85 +2,76 @@
 
 Notable changes to this project will be documented in this file.
 
+## [2.0.0]
+
+-   Support for Silverstripe 6
+-   Code cleanup
+
 ## [1.4.4]
 
-- Replace deprecated DataExtension with Extension
-
+-   Replace deprecated DataExtension with Extension
 
 ## [1.4.3]
 
-- Bugfix: Declare $blogPosts in BlogController
-
+-   Bugfix: Declare $blogPosts in BlogController
 
 ## [1.4.2]
 
-- Replace deprecated $Last with $IsLast (template example)
-- Fix: canView() logic
-
+-   Replace deprecated $Last with $IsLast (template example)
+-   Fix: canView() logic
 
 ## [1.4.1]
 
-- Minor bug fixes
-
+-   Minor bug fixes
 
 ## [1.4.0]
 
-- Silverstripe 5 compatibility
-- PHP 8.2 support
-- Code cleanup
-
+-   Silverstripe 5 compatibility
+-   PHP 8.2 support
+-   Code cleanup
 
 ## [1.3.0]
 
-- Rename Controller method with name collision
-
+-   Rename Controller method with name collision
 
 ## [1.2.0]
 
-- Modify permissions calculation
-- Add published state column
-
+-   Modify permissions calculation
+-   Add published state column
 
 ## [1.1.0]
 
-- Allow extending CMSFields (updateBlogCMSFields|updateBlogPostCMSFields)
-
+-   Allow extending CMSFields (updateBlogCMSFields|updateBlogPostCMSFields)
 
 ## [1.0.0]
 
-- Page icons for vendor modules [see pull request](https://github.com/silverstripe/silverstripe-cms/pull/1996)
-- Update requirements
-
+-   Page icons for vendor modules [see pull request](https://github.com/silverstripe/silverstripe-cms/pull/1996)
+-   Update requirements
 
 ## [1.0.0-beta6]
 
-- Switch to silverstripe-vendormodule
-
+-   Switch to silverstripe-vendormodule
 
 ## [1.0.0-beta5]
 
-- Trailing slash for RSS feed on BlogController
-- RSS redirection for BlogPostController
-
+-   Trailing slash for RSS feed on BlogController
+-   RSS redirection for BlogPostController
 
 ## [1.0.0-beta4]
 
-- Set the "Title" to "Post Title"
-
+-   Set the "Title" to "Post Title"
 
 ## [1.0.0-beta3]
 
-- Add limit to rss (PostsPerPage)
-- Ensure BlogPost parent is a blog, else set it
-
+-   Add limit to rss (PostsPerPage)
+-   Ensure BlogPost parent is a blog, else set it
 
 ## [1.0.0-beta2]
 
-- Remove PostSummary()
-- Use $this->dataRecord
-- Fix typos
-
+-   Remove PostSummary()
+-   Use $this->dataRecord
+-   Fix typos
 
 ## [1.0.0-beta1]
 
-- Initial release
+-   Initial release
