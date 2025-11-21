@@ -171,7 +171,7 @@ class BlogPost extends \Page
 
         $featured_image = UploadField::create(
             'FeaturedImage',
-            'Featured image'
+            'Featured image',
         );
         $featured_image->setFolderName($this->config()->get('featured_image_folder'));
         $featured_image->getValidator()->setAllowedExtensions(['jpg', 'jpeg', 'png', 'gif']);
@@ -179,7 +179,7 @@ class BlogPost extends \Page
         $fields->addFieldToTab(
             'Root.Main',
             $featured_image,
-            'Content'
+            'Content',
         );
 
         $url_segment = $fields->dataFieldByName('URLSegment');
@@ -188,19 +188,14 @@ class BlogPost extends \Page
             $fields->addFieldToTab('Root.PostOptions', $url_segment);
         }
 
-        $fields->addFieldToTab(
+        $fields->addFieldsToTab(
             'Root.PostOptions',
-            $publish_date = DatetimeField::create('PublishDate')
-        );
-
-        $publish_date->setDescription(
-            'Will be set to "now" if published without a value.'
-        );
-
-        $fields->addFieldToTab(
-            'Root.PostOptions',
-            TextAreaField::create('Summary', 'Post summary')
-                ->setRightTitle('If used, this will be shown in the blog post overview instead of an excerpt')
+            [
+                DatetimeField::create('PublishDate')
+                    ->setDescription('Will be set to "now" if published without a value.'),
+                TextAreaField::create('Summary', 'Post summary')
+                ->setDescription('If used, this will be shown in the blog post overview instead of an excerpt'),
+            ],
         );
 
         $this->extend('updateBlogPostCMSFields', $fields);
@@ -218,6 +213,11 @@ class BlogPost extends \Page
         return !empty($this->PublishDate) ? $this->PublishDate : null;
     }
 
+    /**
+     * Return the previous blog post, if exists
+     *
+     * @return mixed
+     */
     public function previousBlogPost()
     {
         $all_posts = $this->Parent()->getBlogPosts();
@@ -229,6 +229,11 @@ class BlogPost extends \Page
             ->first();
     }
 
+    /**
+     * Return the next blog post, if exists
+     *
+     * @return mixed
+     */
     public function nextBlogPost()
     {
         $all_posts = $this->Parent()->getBlogPosts();
@@ -242,6 +247,8 @@ class BlogPost extends \Page
 
     /**
      * Ensure the Parent is a Blog, if not move it to the first blog
+     *
+     * @return void
      */
     public function onBeforeWrite()
     {
@@ -267,9 +274,6 @@ class BlogPost extends \Page
      */
     public function onBeforePublish(&$original)
     {
-        /**
-         * @var DBDatetime $publishDate
-         */
         $publishDate = $this->dbObject('PublishDate');
         if (!$publishDate->getValue()) {
             $this->PublishDate = DBDatetime::now()->getValue();
