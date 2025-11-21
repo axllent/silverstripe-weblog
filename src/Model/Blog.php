@@ -34,7 +34,7 @@ class Blog extends \Page implements PermissionProvider
      *
      * @config
      */
-    private static $icon = 'axllent/silverstripe-weblog: icons/Blog.png';
+    private static $cms_icon = 'axllent/silverstripe-weblog: icons/Blog.png';
 
     /**
      * Table name
@@ -85,6 +85,8 @@ class Blog extends \Page implements PermissionProvider
     {
         $fields = parent::getCMSFields();
 
+        $fields->removeByName('PostsPerPage');
+
         // Move the main tab to the end
         $content_tab = $fields->findOrMakeTab('Root.Main');
         if ($content_tab && $content_fields = $content_tab->FieldList()) {
@@ -94,7 +96,7 @@ class Blog extends \Page implements PermissionProvider
             $tab = $fields->findOrMakeTab('Root.Main');
             $tab->setTitle('Content');
 
-            $fields->addFieldsToTab('Root.Main', $content_fields);
+            $fields->addFieldsToTab('Root.Main', $content_fields->toArray());
         }
 
         $this->extend('updateBlogCMSFields', $fields);

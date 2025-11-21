@@ -30,7 +30,7 @@ from the project.
 ## Requirements
 
 ```
-silverstripe/cms: ^4.0 || ^5.0
+silverstripe/cms: ^6.0
 silverstripe/lumberjack
 ```
 
