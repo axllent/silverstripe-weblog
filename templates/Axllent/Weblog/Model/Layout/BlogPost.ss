@@ -14,7 +14,7 @@
 	</p>
 
 	<% if $FeaturedImage %>
-		$FeaturedImage
+		$FeaturedImage.ScaleMaxWidth(960)
 	<% end_if %>
 
 	$Content
