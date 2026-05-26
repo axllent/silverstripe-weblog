@@ -2,10 +2,20 @@
 
 Notable changes to this project will be documented in this file.
 
+## [2.0.1]
+
+-   Fix inherited parent permissions for blog posts
+-   Fix pagination when start < 0
+
 ## [2.0.0]
 
 -   Support for Silverstripe 6
 -   Code cleanup
+
+## [1.4.5]
+
+-   Fix inherited parent permissions for blog posts
+-   Fix pagination when start < 0
 
 ## [1.4.4]
 
