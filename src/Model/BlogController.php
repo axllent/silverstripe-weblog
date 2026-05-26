@@ -126,7 +126,11 @@ class BlogController extends \PageController
 
         // Set current page
         $start = $this->request->getVar($posts->getPaginationGetVar());
-        $posts->setPageStart($start);
+        if (is_numeric($start) && $start > 0) {
+            $posts->setPageStart($start);
+        } else {
+            $posts->setPageStart(0);
+        }
 
         return $posts;
     }
