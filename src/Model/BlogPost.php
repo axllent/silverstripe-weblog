@@ -300,7 +300,7 @@ class BlogPost extends \Page
             return $extended;
         }
         if (strtotime((string) $this->PublishDate) < time()) {
-            return true;
+            return parent::canView($member, $context);
         }
 
         return Permission::check('CMS_ACCESS_Weblog', 'any', $member);
