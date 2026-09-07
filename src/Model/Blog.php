@@ -7,14 +7,14 @@ use SilverStripe\Core\Convert;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\NumericField;
 use SilverStripe\Forms\Tab;
-use SilverStripe\ORM\ArrayList;
+use SilverStripe\Model\ArrayData;
+use SilverStripe\Model\List\ArrayList;
 use SilverStripe\ORM\FieldType\DBDate;
 use SilverStripe\ORM\FieldType\DBDatetime;
 use SilverStripe\ORM\FieldType\DBInt;
 use SilverStripe\ORM\FieldType\DBYear;
 use SilverStripe\Security\Permission;
 use SilverStripe\Security\PermissionProvider;
-use SilverStripe\View\ArrayData;
 
 class Blog extends \Page implements PermissionProvider
 {
@@ -146,9 +146,9 @@ class Blog extends \Page implements PermissionProvider
 
         // Silverstripe 5 performs more strict validation of columns
         // A new API method is provided when using raw SQL (i.e. IS NULL)
-        return method_exists($filtered, 'orderBy') ?
-            $filtered->orderBy($sort) :
-            $filtered->sort($sort);
+        return method_exists($filtered, 'orderBy')
+            ? $filtered->orderBy($sort)
+            : $filtered->sort($sort);
     }
 
     /**
@@ -271,7 +271,7 @@ class Blog extends \Page implements PermissionProvider
         return [
             'CMS_ACCESS_Weblog' => [
                 'name'     => 'Weblog editor (create / edit posts)',
-                'category' => _t('SilverStripe\\Security\\Permission.CONTENT_CATEGORY', 'CMS Access'),
+                'category' => _t('SilverStripe\Security\Permission.CONTENT_CATEGORY', 'CMS Access'),
                 'help'     => 'Overrules more specific access settings.',
                 'sort'     => 100,
             ],
