@@ -2,6 +2,10 @@
 
 Notable changes to this project will be documented in this file.
 
+## [2.0.3]
+
+- Add BlogPost to SiteTree hide_from_cms_tree to prevent "Too many pages" message
+
 ## [2.0.2]
 
 - Update classname paths for ArrayList and ArrayData
