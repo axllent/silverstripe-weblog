@@ -5,3 +5,8 @@ Axllent\Weblog\Model\Blog:
 Axllent\Weblog\Model\BlogPost:
   extensions:
     - Axllent\Weblog\Extensions\PublishedStatusExtension
+
+# prevents the "Too many pages (show as list)" SiteTree message
+SilverStripe\CMS\Model\SiteTree:
+  hide_from_cms_tree:
+    - Axllent\Weblog\Model\BlogPost
